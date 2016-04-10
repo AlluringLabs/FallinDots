@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{35EB3713-40CA-60DA-EA4E-FFD25619B6B1}") = "Fallin Dots", "Assembly-CSharp.csproj", "{9306D876-89FE-336A-A9C7-2DAE0906E2F2}"
+EndProject
+Project("{35EB3713-40CA-60DA-EA4E-FFD25619B6B1}") = "Fallin Dots", "Assembly-CSharp-Editor-firstpass.csproj", "{6CBEC704-DBB5-ED08-A135-C7FFF6892CD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9306D876-89FE-336A-A9C7-2DAE0906E2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9306D876-89FE-336A-A9C7-2DAE0906E2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9306D876-89FE-336A-A9C7-2DAE0906E2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9306D876-89FE-336A-A9C7-2DAE0906E2F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CBEC704-DBB5-ED08-A135-C7FFF6892CD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CBEC704-DBB5-ED08-A135-C7FFF6892CD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CBEC704-DBB5-ED08-A135-C7FFF6892CD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CBEC704-DBB5-ED08-A135-C7FFF6892CD9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal
