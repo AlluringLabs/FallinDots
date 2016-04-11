@@ -4,7 +4,11 @@ public class Dot : MonoBehaviour
 {
 
     public static int width = 15;
-    float speed = 10;
+    float speed = 3;
+	
+	void Start() {
+		
+	}
 
     void Update()
     {

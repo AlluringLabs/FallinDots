@@ -2,10 +2,13 @@
 
 public class GameManager : MonoBehaviour
 {
-
+	
+	public Theme[] themes;
+	public int currentTheme;
+	
     Camera mainCamera;
     public Spawner mainSpawnPoint;
-    public Transform testSprite;
+    public Dot testSprite;
 
     void Start()
     {
@@ -33,4 +36,10 @@ public class GameManager : MonoBehaviour
         Vector3 levelDimens = mainCamera.ScreenToWorldPoint(screenDimens);
         return levelDimens;
     }
+	
+	[System.Serializable]
+	public class Theme {
+		public Dot[] dotStyles;
+	}
+	
 }
