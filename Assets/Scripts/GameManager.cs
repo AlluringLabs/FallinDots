@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 
     Camera mainCamera;
     public Spawner mainSpawnPoint;
-    public Dot testSprite;
 
     void Start()
     {
