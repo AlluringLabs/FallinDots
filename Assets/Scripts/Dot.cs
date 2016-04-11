@@ -3,8 +3,8 @@
 public class Dot : MonoBehaviour
 {
 
-    public static int width = 15;
-    float speed = 10;
+    public float width = 4.5f;
+    float speed = 10f;
 
     void Update()
     {

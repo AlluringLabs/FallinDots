@@ -20,8 +20,8 @@ public class Spawner : MonoBehaviour
     void Update()
     {
         Debug.Log("update");
-        Debug.Log("next spawn time: " + nextSpawnTime);
-        Debug.Log("time: " + Time.time);
+        //Debug.Log("next spawn time: " + nextSpawnTime);
+        //Debug.Log("time: " + Time.time);
 
         // Just a basic spawn timer to spawn dots at the specified interval.
         if (!isDisabled)
@@ -34,12 +34,19 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    // Generates a random Vec3 position for a newly created dot.
+    Vector3 GenerateRandomPosition()
+    {
+        Vector3 maxPos = gameManager.GetScreenDimensions();
+        Debug.Log("Max Position X: " + maxPos.x);
+        return new Vector3(0, 0, 1);
+        //return new Vector3(Random.Range(0, maxPos.x), 0, 1);
+    }
+
     // Creates the position and Instantiates a new dot.
     public void SpawnDot()
     {
-        Vector3 pos = gameManager.GetScreenDimensions();
-
-        Instantiate(dot, pos, Quaternion.identity);
+        Instantiate(dot, GenerateRandomPosition(), Quaternion.identity);
     }
 
     // Sets a new spawn timer interval.
