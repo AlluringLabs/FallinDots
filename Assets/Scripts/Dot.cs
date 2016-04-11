@@ -1,15 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Dot : MonoBehaviour {
+public class Dot : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public static int width = 15;
+    float speed = 10;
+
+    void Update()
+    {
+        float distanceToMove = speed * Time.deltaTime;
+        transform.Translate(Vector3.down * distanceToMove);
+    }
 }
