@@ -1,22 +1,32 @@
 ﻿using UnityEngine;
-using System.Collections;
 
-public class Spawner : MonoBehaviour {
-	
-	public int msBetweenSpawn = 100;
+public class Spawner : MonoBehaviour
+{
 
+    public int msBetweenSpawn = 100;
+    public Dot dot;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-	
-	public void SetNewSpawnTimer(int spawnTime) {
-		
-	}
+    GameManager gameManager;
+
+    void Start()
+    {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+    }
+
+    void Update()
+    {
+
+    }
+
+    public void SpawnDot()
+    {
+        Vector3 pos = gameManager.GetScreenDimensions();
+
+        Instantiate(dot, pos, Quaternion.identity);
+    }
+
+    public void SetNewSpawnTimer(int spawnTime)
+    {
+
+    }
 }
