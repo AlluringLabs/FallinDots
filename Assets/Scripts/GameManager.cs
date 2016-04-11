@@ -28,14 +28,24 @@ public class GameManager : MonoBehaviour
         // }
     }
 
+    public float GetScreenMinX()
+    {
+        return GetScreenPosition(0.0f).x;
+    }
+
     public float GetScreenMaxX()
     {
         return GetScreenPosition(1.0f).x;
     }
 
-    public float GetScreenMinX()
+    public float GetScreenMinY()
     {
-        return GetScreenPosition(0.0f).x;
+        return GetScreenPosition(0.0f, 0.0f).y;
+    }
+
+    public float GetScreenMaxY()
+    {
+        return GetScreenPosition(0.0f, 1.0f).y;
     }
 
     public Vector3 GetScreenPosition(float x)
