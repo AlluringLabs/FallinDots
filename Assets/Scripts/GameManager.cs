@@ -5,6 +5,9 @@ public class GameManager : MonoBehaviour
 
     public Theme[] themes;
     public int currentTheme;
+	
+	// Set the default level in the editor so we can test different levels without playing the game.
+	public float currentLevel = 1;
 
     Camera mainCamera;
     public Spawner mainSpawnPoint;
@@ -16,16 +19,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // Absolutely shit, but it serves its purpose for the time being.
-        //
-        // Idea: Have either the GameManager, Level or Spawner contain some
-        //       sort of value for how long, in time, the game should wait
-        //       until it spawns another dot.  This way we could have far
-        //       more control over the spawning pattern/time in-between
-        //       dots.
-        // if (Random.value > .95) {
-        //     mainSpawnPoint.SpawnDot();
-        // }
+
     }
 
     public float GetScreenMaxX()
