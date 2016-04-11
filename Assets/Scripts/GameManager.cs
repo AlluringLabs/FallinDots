@@ -22,9 +22,9 @@ public class GameManager : MonoBehaviour
         //       until it spawns another dot.  This way we could have far
         //       more control over the spawning pattern/time in-between
         //       dots.
-        if (Random.value > .95) {
-            mainSpawnPoint.SpawnDot();
-        }
+        // if (Random.value > .95) {
+        //     mainSpawnPoint.SpawnDot();
+        // }
     }
 
     public Vector3 GetScreenDimensions()
