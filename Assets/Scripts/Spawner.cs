@@ -30,19 +30,26 @@ public class Spawner : MonoBehaviour
     }
 
     // Generates a random Vec3 position for a newly created dot.
-    Vector3 GenerateRandomPosition()
+    Vector3 GenerateRandomPosition(float dotWidth)
     {
-        Vector3 maxPos = gameManager.GetScreenDimensions();
-        Debug.Log("Max Position X: " + maxPos.x);
-        return new Vector3(0, 0, 1);
-        //return new Vector3(Random.Range(0, maxPos.x), 0, 1);
+        Vector3 randomPos = gameManager.GetScreenPosition(Random.value);
+        float halfDotWidth = dotWidth/2;
+
+        if (randomPos.x < gameManager.GetScreenMinX() + halfDotWidth) {
+            randomPos += (Vector3.right * halfDotWidth);
+        }
+        else if (randomPos.x > gameManager.GetScreenMaxX() - halfDotWidth) {
+            randomPos -= (Vector3.right * halfDotWidth);
+        }
+
+        return randomPos;
     }
 
     // Creates the position and Instantiates a new dot.
     IEnumerator SpawnDot()
     {
         Dot newDot = GetRandomDotStyle();
-        Dot spawnedDot = (Dot)Instantiate(newDot, GenerateRandomPosition(), Quaternion.identity);
+        Dot spawnedDot = (Dot)Instantiate(newDot, GenerateRandomPosition(newDot.width), Quaternion.identity);
         spawnedDot.transform.parent = this.transform;
         spawnedDot.name = "Dot";
 

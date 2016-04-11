@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        Vector3 screenDimensions = GetScreenDimensions();
     }
 
     void Update()
@@ -29,14 +28,24 @@ public class GameManager : MonoBehaviour
         // }
     }
 
-    public Vector3 GetScreenDimensions()
+    public float GetScreenMaxX()
     {
-        // TODO: Move this method to be private and update the screenDimensions
-        // only when it needs to be updated (i.e: screen resize event).
-        // That way we don't need to worry about generating the screen size
-        // every single time we need to access it.
-        Vector3 screenDimens = new Vector3(Screen.width, Screen.height, 1);
-        return mainCamera.ScreenToWorldPoint(screenDimens);
+        return GetScreenPosition(1.0f).x;
+    }
+
+    public float GetScreenMinX()
+    {
+        return GetScreenPosition(0.0f).x;
+    }
+
+    public Vector3 GetScreenPosition(float x)
+    {
+        return GetScreenPosition(x, 1.0f);
+    }
+
+    public Vector3 GetScreenPosition(float x, float y)
+    {
+        return mainCamera.ViewportToWorldPoint(new Vector3(x, y, mainCamera.nearClipPlane));
     }
 
     [System.Serializable]
