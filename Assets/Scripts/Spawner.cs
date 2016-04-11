@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
@@ -8,28 +9,22 @@ public class Spawner : MonoBehaviour
     public bool isDisabled;
 
     float nextSpawnTime;
-
-
     GameManager gameManager;
 
     void Start()
     {
-        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        gameManager = FindObjectOfType<GameManager>();
     }
 
     void Update()
     {
-        Debug.Log("update");
-        //Debug.Log("next spawn time: " + nextSpawnTime);
-        //Debug.Log("time: " + Time.time);
-
         // Just a basic spawn timer to spawn dots at the specified interval.
         if (!isDisabled)
         {
             if (Time.time > nextSpawnTime)
             {
                 nextSpawnTime = Time.time + timeBetweenSpawn;
-                SpawnDot();
+                StartCoroutine(SpawnDot());
             }
         }
     }
@@ -44,9 +39,23 @@ public class Spawner : MonoBehaviour
     }
 
     // Creates the position and Instantiates a new dot.
-    public void SpawnDot()
+    IEnumerator SpawnDot()
     {
-        Instantiate(dot, GenerateRandomPosition(), Quaternion.identity);
+        Dot newDot = GetRandomDotStyle();
+        Dot spawnedDot = (Dot)Instantiate(newDot, GenerateRandomPosition(), Quaternion.identity);
+        spawnedDot.transform.parent = this.transform;
+        spawnedDot.name = "Dot";
+
+        yield return null;
+    }
+
+    // Gets a random dot style from the current theme set in GameManager. Kind of shitty for now, but it works.
+    public Dot GetRandomDotStyle()
+    {
+        int maxRange = gameManager.themes[gameManager.currentTheme].dotStyles.Length;
+        int random = Random.Range(0, maxRange);
+        Dot randomDot = gameManager.themes[gameManager.currentTheme].dotStyles[random]; 
+        return randomDot;
     }
 
     // Sets a new spawn timer interval.
