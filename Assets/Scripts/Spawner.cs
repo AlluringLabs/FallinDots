@@ -18,29 +18,32 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-		if(gameManager.hasStarted) {
-			// Just a basic spawn timer to spawn dots at the specified interval.
-			if (!isDisabled)
-			{
-				if (Time.time > nextSpawnTime)
-				{
-					nextSpawnTime = Time.time + timeBetweenSpawn;
-					StartCoroutine(SpawnDot());
-				}
-			}
-		}
+        if (gameManager.hasStarted)
+        {
+            // Just a basic spawn timer to spawn dots at the specified interval.
+            if (!isDisabled)
+            {
+                if (Time.time > nextSpawnTime)
+                {
+                    nextSpawnTime = Time.time + timeBetweenSpawn;
+                    StartCoroutine(SpawnDot());
+                }
+            }
+        }
     }
 
     // Generates a random Vec3 position for a newly created dot.
     Vector3 GenerateRandomPosition(float dotWidth)
     {
-        Vector3 randomPos = gameManager.camUtils.GetScreenPosition(Random.value);
-        float halfDotWidth = dotWidth/2;
+        Vector3 randomPos = gameManager.camUtils.GetScreenPosition(1.0f);
+        float halfDotWidth = dotWidth / 2;
 
-        if (randomPos.x < gameManager.camBounds.minX + halfDotWidth) {
+        if (randomPos.x < gameManager.camBounds.minX + halfDotWidth)
+        {
             randomPos += (Vector3.right * halfDotWidth);
         }
-        else if (randomPos.x > gameManager.camBounds.maxX - halfDotWidth) {
+        else if (randomPos.x > gameManager.camBounds.maxX - halfDotWidth)
+        {
             randomPos -= (Vector3.right * halfDotWidth);
         }
 
