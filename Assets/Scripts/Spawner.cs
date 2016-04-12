@@ -35,7 +35,7 @@ public class Spawner : MonoBehaviour
     // Generates a random Vec3 position for a newly created dot.
     Vector3 GenerateRandomPosition(float dotWidth)
     {
-        Vector3 randomPos = gameManager.camUtils.GetScreenPosition(1.0f);
+        Vector3 randomPos = gameManager.camUtils.GetScreenPosition(Random.value);
         float halfDotWidth = dotWidth / 2;
 
         if (randomPos.x < gameManager.camBounds.minX + halfDotWidth)

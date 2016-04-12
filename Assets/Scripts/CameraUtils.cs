@@ -35,11 +35,8 @@ public class CameraUtils : MonoBehaviour
         return cam.ViewportToWorldPoint(viewport);
     }
 
-    public class Bounds
+    public struct Bounds
     {
-        public float minX;
-        public float maxX;
-        public float minY;
-        public float maxY;
+        public float minX, maxX, minY, maxY;
     }
 }
