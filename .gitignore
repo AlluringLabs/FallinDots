@@ -29,6 +29,8 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
+/Editor/VSCode.cs
+
 .vscode/launch.json
 
 # Spacemacs/Emacs
