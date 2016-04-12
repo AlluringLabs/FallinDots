@@ -47,7 +47,9 @@ public class Spawner : MonoBehaviour
             randomPos -= (Vector3.right * halfDotWidth);
         }
 
-        return randomPos;
+        // Adding -2 to the y-axis so dots look like they are sliding in instead
+        // of just spawning right on screen.  More fluid.
+        return randomPos + (Vector3.up * 2);
     }
 
     // Creates the position and Instantiates a new dot.
