@@ -27,7 +27,7 @@ public class Dot : MonoBehaviour
             }
         }
 
-        if (newPosition.y < gameManager.GetScreenMinY()) {
+        if (newPosition.y < gameManager.camBounds.minY) {
             Destroy(gameObject);
         }
         else {
