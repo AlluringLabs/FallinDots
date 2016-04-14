@@ -1,20 +1,21 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Dot : MonoBehaviour
 {
-
+	
+	public ParticleSystem deathParticles;
     public float width = 2.5f;
 
-    float speed = 10f;
+    float speed = 5f;
     GameManager gameManager;
 
-    void Start()
-    {
+    void Start() {
         gameManager = FindObjectOfType<GameManager>();
+		deathParticles = GetComponent<ParticleSystem>();
     }
 
-    void Update()
-    {
+    void Update() {
         float distanceToMove = speed * Time.deltaTime;
         Vector3 currentPos = transform.position;
         Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);

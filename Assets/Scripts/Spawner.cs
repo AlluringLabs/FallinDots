@@ -5,7 +5,6 @@ public class Spawner : MonoBehaviour
 {
 
     public float timeBetweenSpawn = 2f;
-    public Dot dot;
     public bool isDisabled;
 
     float nextSpawnTime;
