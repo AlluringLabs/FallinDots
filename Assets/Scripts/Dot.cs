@@ -1,21 +1,23 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class Dot : MonoBehaviour
 {
-	
-	public ParticleSystem deathParticles;
+    // Events
+    public delegate void OnDestroyedHandler(GameObject gameObject, bool playerDidDestroy);
+    public event OnDestroyedHandler OnDestroy;
+
     public float width = 2.5f;
 
-    float speed = 5f;
+    float speed = 10f;
     GameManager gameManager;
 
-    void Start() {
+    void Start()
+    {
         gameManager = FindObjectOfType<GameManager>();
-		deathParticles = GetComponent<ParticleSystem>();
     }
 
-    void Update() {
+    void Update()
+    {
         float distanceToMove = speed * Time.deltaTime;
         Vector3 currentPos = transform.position;
         Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);
@@ -25,11 +27,13 @@ public class Dot : MonoBehaviour
 
             if (clickHappenedInDot(clickPos)) {
                 Destroy(gameObject);
+                OnDestroy(gameObject, true);
             }
         }
 
         if (newPosition.y < gameManager.camBounds.minY) {
             Destroy(gameObject);
+            OnDestroy(gameObject, false);
         }
         else {
             transform.Translate(Vector3.down * distanceToMove);
