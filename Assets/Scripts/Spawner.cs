@@ -55,7 +55,8 @@ public class Spawner : MonoBehaviour
     IEnumerator SpawnDot()
     {
         Dot newDot = GetRandomDotStyle();
-        Dot spawnedDot = (Dot)Instantiate(newDot, GenerateRandomPosition(newDot.width), Quaternion.identity);
+        Vector3 newDotPos = GenerateRandomPosition(newDot.width);
+        Dot spawnedDot = (Dot)Instantiate(newDot, newDotPos, Quaternion.identity);
         spawnedDot.transform.parent = this.transform;
         spawnedDot.name = "Dot";
 
