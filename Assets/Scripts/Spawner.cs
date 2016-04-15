@@ -3,12 +3,13 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
+    
+    GameManager gameManager;
 
     public float timeBetweenSpawn = 2f;
     public bool isDisabled;
 
     float nextSpawnTime;
-    GameManager gameManager;
 
     void Start()
     {
@@ -19,13 +20,15 @@ public class Spawner : MonoBehaviour
     {
         if (gameManager.hasStarted)
         {
-            // Just a basic spawn timer to spawn dots at the specified interval.
-            if (!isDisabled)
-            {
-                if (Time.time > nextSpawnTime)
+            if(!gameManager.isPaused) {
+                // Just a basic spawn timer to spawn dots at the specified interval.
+                if (!isDisabled)
                 {
-                    nextSpawnTime = Time.time + timeBetweenSpawn;
-                    StartCoroutine(SpawnDot());
+                    if (Time.time > nextSpawnTime)
+                    {
+                        nextSpawnTime = Time.time + timeBetweenSpawn;
+                        StartCoroutine(SpawnDot());
+                    }
                 }
             }
         }
@@ -57,11 +60,18 @@ public class Spawner : MonoBehaviour
         Dot newDot = GetRandomDotStyle();
         Vector3 newDotPos = GenerateRandomPosition(newDot.width);
         Dot spawnedDot = (Dot)Instantiate(newDot, newDotPos, Quaternion.identity);
+        spawnedDot.transform.localScale = GetRandomScale();
+        Debug.Log(GetRandomScale());
         spawnedDot.transform.parent = this.transform;
         spawnedDot.name = "Dot";
 
         yield return null;
     }
+    
+    Vector3 GetRandomScale() {
+        float randomSize = Random.Range(2, 6);
+        return new Vector3(randomSize, randomSize, 0);
+    } 
 
     // Gets a random dot style from the current theme set in GameManager. Kind of shitty for now, but it works.
     public Dot GetRandomDotStyle()
@@ -73,7 +83,7 @@ public class Spawner : MonoBehaviour
     }
 
     // Sets a new spawn timer interval.
-    public void SetNewSpawnTimer(float newTime)
+    public void SetSpawnTimer(float newTime)
     {
         timeBetweenSpawn = newTime;
     }
