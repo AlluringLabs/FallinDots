@@ -25,11 +25,11 @@ public class GameManager : MonoBehaviour
         camBounds = (CameraUtils.Bounds)camUtils.bounds;
         hasStarted = true;
     }
-	
-	void Update()
-	{
-		
-	}
+
+    void Update()
+    {
+
+    }
 
     [System.Serializable]
     public class Theme

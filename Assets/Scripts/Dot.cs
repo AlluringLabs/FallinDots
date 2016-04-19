@@ -3,8 +3,8 @@
 public class Dot : MonoBehaviour
 {
     // Events
-    public delegate void OnDestroyedHandler(GameObject gameObject, bool playerDidDestroy);
-    public event OnDestroyedHandler OnDestroy;
+    public delegate void DestroyedHandler(GameObject gameObject, bool playerDidDestroy);
+    public event DestroyedHandler OnDestroy;
 
     public float width = 2.5f;
 
@@ -26,14 +26,14 @@ public class Dot : MonoBehaviour
             Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             if (clickHappenedInDot(clickPos)) {
-                Destroy(gameObject);
                 OnDestroy(gameObject, true);
+                Destroy(gameObject);
             }
         }
 
         if (newPosition.y < gameManager.camBounds.minY) {
-            Destroy(gameObject);
             OnDestroy(gameObject, false);
+            Destroy(gameObject);
         }
         else {
             transform.Translate(Vector3.down * distanceToMove);
