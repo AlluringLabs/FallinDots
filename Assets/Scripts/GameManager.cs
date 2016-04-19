@@ -28,7 +28,40 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        // Kind of shit for now, but eventually we'll need something like this for mobile
+        // pause menu of sorts.
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
 
+        // Just for testing and fun purposes...
+        // this could even be a powerup
+        if (Input.GetMouseButton(1))
+        {
+            Time.timeScale = 0.5f;
+        }
+
+        if (Input.GetMouseButtonUp(1))
+        {
+            Time.timeScale = 1;
+        }
+    }
+
+    // Just toggles the pause state of the game. This should probably include something like
+    // fading a menu in/out as well.
+    private void TogglePause()
+    {
+        if (isPaused)
+        {
+            isPaused = false;
+            Time.timeScale = 1;
+        }
+        else
+        {
+            isPaused = true;
+            Time.timeScale = 0;
+        }
     }
 
     [System.Serializable]

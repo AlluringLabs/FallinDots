@@ -18,25 +18,27 @@ public class Dot : MonoBehaviour
 
     void Update()
     {
-        float distanceToMove = speed * Time.deltaTime;
-        Vector3 currentPos = transform.position;
-        Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);
+        if(!gameManager.isPaused) {
+            float distanceToMove = speed * Time.deltaTime;
+            Vector3 currentPos = transform.position;
+            Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);
 
-        if (Input.GetMouseButtonDown(0)) {
-            Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            if (Input.GetMouseButtonDown(0)) {
+                Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-            if (clickHappenedInDot(clickPos)) {
-                OnDestroy(gameObject, true);
-                Destroy(gameObject);
+                if (clickHappenedInDot(clickPos)) {
+                    Destroy(gameObject);
+                    // OnDestroy(gameObject, true);
+                }
             }
-        }
 
-        if (newPosition.y < gameManager.camBounds.minY) {
-            OnDestroy(gameObject, false);
-            Destroy(gameObject);
-        }
-        else {
-            transform.Translate(Vector3.down * distanceToMove);
+            if (newPosition.y < gameManager.camBounds.minY) {
+                Destroy(gameObject);
+                // OnDestroy(gameObject, false);
+            }
+            else {
+                transform.Translate(Vector3.down * distanceToMove);
+            }
         }
     }
 
