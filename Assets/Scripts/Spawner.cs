@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Spawner : MonoBehaviour
 {
-    
     GameManager gameManager;
 
     public float timeBetweenSpawn = 2f;
@@ -18,18 +17,12 @@ public class Spawner : MonoBehaviour
 
     void Update()
     {
-        if (gameManager.hasStarted)
+        if (gameManager.hasStarted && !gameManager.isPaused && !isDisabled)
         {
-            if(!gameManager.isPaused) {
-                // Just a basic spawn timer to spawn dots at the specified interval.
-                if (!isDisabled)
-                {
-                    if (Time.time > nextSpawnTime)
-                    {
-                        nextSpawnTime = Time.time + timeBetweenSpawn;
-                        StartCoroutine(SpawnDot());
-                    }
-                }
+            if (Time.time > nextSpawnTime)
+            {
+                nextSpawnTime = Time.time + timeBetweenSpawn;
+                StartCoroutine(SpawnDot());
             }
         }
     }
@@ -61,24 +54,24 @@ public class Spawner : MonoBehaviour
         Vector3 newDotPos = GenerateRandomPosition(newDot.width);
         Dot spawnedDot = (Dot)Instantiate(newDot, newDotPos, Quaternion.identity);
         spawnedDot.transform.localScale = GetRandomScale();
-        Debug.Log(GetRandomScale());
         spawnedDot.transform.parent = this.transform;
         spawnedDot.name = "Dot";
 
         yield return null;
     }
-    
-    Vector3 GetRandomScale() {
+
+    Vector3 GetRandomScale()
+    {
         float randomSize = Random.Range(2, 6);
-        return new Vector3(randomSize, randomSize, 0);
-    } 
+        return new Vector3(randomSize, randomSize, 1);
+    }
 
     // Gets a random dot style from the current theme set in GameManager. Kind of shitty for now, but it works.
     public Dot GetRandomDotStyle()
     {
         int maxRange = gameManager.themes[gameManager.currentTheme].dotStyles.Length;
         int random = Random.Range(0, maxRange);
-        Dot randomDot = gameManager.themes[gameManager.currentTheme].dotStyles[random]; 
+        Dot randomDot = gameManager.themes[gameManager.currentTheme].dotStyles[random];
         return randomDot;
     }
 
