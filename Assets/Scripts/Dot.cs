@@ -1,53 +1,49 @@
 ﻿using UnityEngine;
+using TouchScript.Gestures;
+using TouchScript.Hit;
+using System;
 
 public class Dot : MonoBehaviour
 {
-    // Events
-    public delegate void DestroyedHandler(GameObject gameObject, bool playerDidDestroy);
-    public event DestroyedHandler OnDestroy;
 
-    public float width = 2.5f;
+	public float speed = 10f;
+	public float width = 2.5f;
 
-    float speed = 10f;
-    GameManager gameManager;
+	GameManager gameManager;
 
-    void Start()
-    {
-        gameManager = FindObjectOfType<GameManager>();
-    }
+	void Start()
+	{
+		gameManager = FindObjectOfType<GameManager> ();
+	}
 
-    void Update()
-    {
-        if(!gameManager.isPaused) {
-            float distanceToMove = speed * Time.deltaTime;
-            Vector3 currentPos = transform.position;
-            Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);
+	private void OnEnable() {
+		Debug.Log ("ENABLE");
+		GetComponent<TapGesture> ().Tapped += tappedHandler;
+	}
 
-            if (Input.GetMouseButtonDown(0)) {
-                Vector3 clickPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+	private void OnDisable() {
+		GetComponent<TapGesture> ().Tapped -= tappedHandler;
+		Debug.Log ("DISABLE");
+	}
 
-                if (clickHappenedInDot(clickPos)) {
-                    Destroy(gameObject);
-                    // OnDestroy(gameObject, true);
-                }
-            }
+	private void tappedHandler(object sender, EventArgs e)
+	{
+		Debug.Log ("tapped handler");
+		Destroy (gameObject);
+//		Debug.Log ("TAP HANDLER");
+//		Destroy (gameObject);
+	}
 
-            if (newPosition.y < gameManager.camBounds.minY) {
-                Destroy(gameObject);
-                // OnDestroy(gameObject, false);
-            }
-            else {
-                transform.Translate(Vector3.down * distanceToMove);
-            }
-        }
-    }
-
-    bool clickHappenedInDot(Vector3 clickPos) {
+	void Update()
+	{
+		// Move the object
+		float distanceToMove = speed * Time.deltaTime;
         Vector3 currentPos = transform.position;
+        Vector3 newPosition = currentPos + (Vector3.down * distanceToMove);
+		transform.Translate(Vector3.down * distanceToMove);
 
-        return clickPos.x > currentPos.x - width/2 &&
-            clickPos.x < currentPos.x + width/2 &&
-            clickPos.y > currentPos.y - width/2 &&
-            clickPos.y < currentPos.y + width/2;
-    }
+        if (newPosition.y < gameManager.camBounds.minY) {
+            Destroy(gameObject);
+        }
+	}
 }

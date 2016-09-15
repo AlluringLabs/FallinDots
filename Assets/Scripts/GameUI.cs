@@ -10,8 +10,8 @@ public class GameUI : MonoBehaviour
 
     void Start()
     {
-        Dot dot = GetComponent<Dot>();
-        dot.OnDestroy += new Dot.DestroyedHandler(HandleDotDestroyed);
+//        Dot dot = GetComponent<Dot>();
+//        dot.OnDestroy += new Dot.DestroyedHandler(HandleDotDestroyed);
     }
 
     void Update()
