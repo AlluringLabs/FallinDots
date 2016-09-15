@@ -6,15 +6,26 @@ namespace FallinDots {
 	
 	public class Dot : BaseBehaviour {
 
-		// Use this for initialization
-		void Start () {
-		
+		// TODO: Add modifiers for dots like powerups, movement variations, etc...
+
+		// How fast the dot should be moving
+		public float speed = 3f;
+
+		// How big the dot is
+		public float size = 2.5f;
+
+		void Start() {
+			
 		}
-		
-		// Update is called once per frame
-		void Update () {
-		
+
+		void Update() {
+			
 		}
+
+		private void Move() {
+			
+		}
+
 	}
 
 }
