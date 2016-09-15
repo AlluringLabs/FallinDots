@@ -24,7 +24,7 @@ namespace FallinDots {
 		void Update () {
             // Has the game started? Is the game paused? Is this spawn point disabled?
 
-            if(gameManager.started && !gameManager.paused && !disabled) {
+            if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled) {
                 if(Time.time > nextSpawnTime) {
                     nextSpawnTime = Time.time + timeBetweenSpawn;
                     StartCoroutine(SpawnDot());
@@ -55,7 +55,7 @@ namespace FallinDots {
         }
 
         IEnumerator SpawnDot() {
-            Dot newDot = Dot();
+            Dot newDot = ThemeManager.Instance.GetRandom();
 
             Vector3 newPosition = RandomizePosition(newDot.width);
 
@@ -67,8 +67,7 @@ namespace FallinDots {
             count = count++;
             yield return null;
         }
-
-
+            
 	}
 
 }

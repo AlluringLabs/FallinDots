@@ -7,6 +7,8 @@ namespace FallinDots {
 	public class GameManager : BaseBehaviour
 	{
 
+        public static GameManager Instance;
+
         public bool paused = false;
         public bool started = false;
         public bool ended = false;
@@ -14,6 +16,15 @@ namespace FallinDots {
 		void Start() {
 			started = true;
 		}
+
+        void Awake() {
+            if(!Instance) {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            } else {
+                Destroy(gameObject);
+            }
+        }
 
 		void Update() {
 			// Kind of shit for now, but eventually we'll need something like this for mobile

@@ -9,5 +9,7 @@ namespace FallinDots.Generic
             return Camera.main.GetComponent<CameraUtils>();
         }
 
+        // TODO: Global-use PlayerPrefs functions
+
 	}
 }
