@@ -12,7 +12,7 @@ namespace FallinDots {
 		public float speed = 3f;
 
 		// How big the dot is
-		public float size = 2.5f;
+		public float width = 2.5f;
 
 		void Start() {
 			

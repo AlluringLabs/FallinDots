@@ -11,12 +11,6 @@ namespace FallinDots {
         public bool started = false;
         public bool ended = false;
 
-		// Camera Stuffs
-		public CameraUtils camUtils;
-		public CameraUtils.Bounds camBounds;
-
-		public int currentTheme;
-
 		void Start() {
 			started = true;
 		}
