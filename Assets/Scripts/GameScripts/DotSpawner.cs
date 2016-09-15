@@ -8,7 +8,7 @@ namespace FallinDots {
 
 		GameManager gameManager;
 
-		public float timeBetweenSpawn = 1;
+		public float timeBetweenSpawn = 1f;
 		public bool disabled = false;
         public int count = 0;
 
@@ -55,6 +55,7 @@ namespace FallinDots {
         }
 
         IEnumerator SpawnDot() {
+            count = count + 1;
             Dot newDot = ThemeManager.Instance.GetRandom();
 
             Vector3 newPosition = RandomizePosition(newDot.width);
@@ -64,7 +65,6 @@ namespace FallinDots {
             spawnedDot.transform.parent = GameObject.Find("DynamicObjects").transform;
             spawnedDot.name = "DOT_" + count;
 
-            count = count++;
             yield return null;
         }
             

@@ -13,6 +13,8 @@ namespace FallinDots {
         public bool started = false;
         public bool ended = false;
 
+        public int level = 0;
+
 		void Start() {
 			started = true;
 		}

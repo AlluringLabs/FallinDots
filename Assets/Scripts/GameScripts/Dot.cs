@@ -14,16 +14,22 @@ namespace FallinDots {
 		// How big the dot is
 		public float width = 2.5f;
 
-		void Start() {
-			
-		}
-
 		void Update() {
-			
+            if(!GameManager.Instance.paused) {
+                Move();
+            }
 		}
 
 		private void Move() {
-			
+            float moveDistance = speed * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
+
+            if(nextPosition.y < CamUtils().bounds.minY) {
+                Destroy(gameObject);
+            } else {
+                transform.Translate(Vector3.down * moveDistance);
+            }
 		}
 
 	}
