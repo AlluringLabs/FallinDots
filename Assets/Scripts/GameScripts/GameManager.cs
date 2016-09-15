@@ -15,6 +15,12 @@ namespace FallinDots {
 
         public int level = 0;
 
+        public int playerScore = 0;
+        public int playerLose = 0;
+
+        // HUH?
+        public int playerAwesome = 0;
+
 		void Start() {
 			started = true;
 		}

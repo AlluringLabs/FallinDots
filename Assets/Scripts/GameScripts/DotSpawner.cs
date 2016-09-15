@@ -6,24 +6,16 @@ namespace FallinDots {
 
 	public class DotSpawner : BaseBehaviour {
 
-		GameManager gameManager;
-
 		public float timeBetweenSpawn = 1f;
 		public bool disabled = false;
         public int count = 0;
 
 		float nextSpawnTime;
-
-		// Use this for initialization
-		void Start () {
-			gameManager = FindObjectOfType<GameManager>();
-            Debug.Log("Started");
-		}
 		
 		// Update is called once per frame
 		void Update () {
+            
             // Has the game started? Is the game paused? Is this spawn point disabled?
-
             if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled) {
                 if(Time.time > nextSpawnTime) {
                     nextSpawnTime = Time.time + timeBetweenSpawn;
