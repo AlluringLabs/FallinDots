@@ -8,7 +8,7 @@ namespace FallinDots.GUI {
 	public class GameOverlayUI : BaseBehaviour {
 
         public Text currentScoreText;
-        public Text loseText;
+        public Text amountLostText;
         public Text currentLevelText;
 
 		void Start() {

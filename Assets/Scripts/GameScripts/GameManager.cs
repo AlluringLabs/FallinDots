@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using TouchScript.Gestures;
 using FallinDots.Generic;
 
 namespace FallinDots {
@@ -13,13 +14,10 @@ namespace FallinDots {
         public bool started = false;
         public bool ended = false;
 
-        public int level = 0;
+        public int currentLevel = 0;
 
         public int playerScore = 0;
         public int playerLose = 0;
-
-        // HUH?
-        public int playerAwesome = 0;
 
 		void Start() {
 			started = true;
