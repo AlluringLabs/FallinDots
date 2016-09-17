@@ -7,6 +7,10 @@ namespace FallinDots.Dots {
 	
     public class Dot : BaseBehaviour {
 
+        public delegate void DotDestroyed(int byUser);
+        public event DotDestroyed dotDestroyed;
+//        public event Action DotDestroyed(bool byUser);
+
 		// TODO: Add modifiers for dots like powerups, movement variations, etc...
 
 		// How fast the dot should be moving
@@ -15,12 +19,24 @@ namespace FallinDots.Dots {
 		// How big the dot is
 		public float width = 1.5f;
 
+        void Start() {
+//            FallinDots.InputManager.dotTapped += OnDotTapped;
+            FindObjectOfType<InputManager>().dotTapped += OnDotTapped; 
+        }
+
 		void Update() {
             // if the game manager is not paused
             if(!GameManager.Instance.paused) {
                 Move();
             }
 		}
+
+        public void OnDotTapped(Dot target, int byUser) {
+            if(target.gameObject.name == gameObject.name) {
+                Destroy(gameObject);
+                dotDestroyed(byUser);
+            }
+        }
 
 		private void Move() {
             float moveDistance = speed * Time.deltaTime;
