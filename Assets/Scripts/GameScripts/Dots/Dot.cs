@@ -7,7 +7,7 @@ namespace FallinDots.Dots {
 	
     public class Dot : BaseBehaviour {
 
-        public delegate void DotDestroyed(int byUser);
+        public delegate void DotDestroyed();
         public event DotDestroyed dotDestroyed;
 //        public event Action DotDestroyed(bool byUser);
 
@@ -19,10 +19,7 @@ namespace FallinDots.Dots {
 		// How big the dot is
 		public float width = 1.5f;
 
-        void Start() {
-//            FallinDots.InputManager.dotTapped += OnDotTapped;
-            FindObjectOfType<InputManager>().dotTapped += OnDotTapped; 
-        }
+//        public bool isDisabled = false;
 
 		void Update() {
             // if the game manager is not paused
@@ -31,11 +28,12 @@ namespace FallinDots.Dots {
             }
 		}
 
-        public void OnDotTapped(Dot target, int byUser) {
-            if(target.gameObject.name == gameObject.name) {
+        public void destroy() {
+//            if(!isDisabled) {
+//                isDisabled = true;
+                GameManager.Instance.updateScore();
                 Destroy(gameObject);
-                dotDestroyed(byUser);
-            }
+//            }
         }
 
 		private void Move() {
