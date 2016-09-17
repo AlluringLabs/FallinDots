@@ -37,8 +37,8 @@ namespace FallinDots {
             return randomPosition;
         }
 
-        Vector3 RandomizeScale() {
-            float randomSize = Random.Range(2, 6);
+        Vector3 RandomizeScale(float width, float maxWidth) {
+            float randomSize = Random.Range(width, maxWidth);
             return new Vector3(randomSize, randomSize, 1);
         }
 
@@ -51,9 +51,10 @@ namespace FallinDots {
             Dot newDot = ThemeManager.Instance.GetRandom();
 
             Vector3 newPosition = RandomizePosition(newDot.width);
+            Vector3 randomScale = RandomizeScale(newDot.width, newDot.width * 2);
 
             Dot spawnedDot = (Dot) Instantiate(newDot, newPosition, Quaternion.identity);
-            spawnedDot.transform.localScale = RandomizeScale();
+            spawnedDot.transform.localScale = randomScale;
             spawnedDot.transform.parent = GameObject.Find("DynamicObjects").transform;
             spawnedDot.name = "DOT_" + count;
 

@@ -14,7 +14,11 @@ namespace FallinDots {
 		public float speed = 3f;
 
 		// How big the dot is
-		public float width = 2.5f;
+		public float width = 1.5f;
+
+//        public Dot() {
+//            
+//        }
 
         private void Start() {
             GetComponent<TapGesture>().Tapped += tappedHandler;
@@ -25,6 +29,7 @@ namespace FallinDots {
         }
 
 		void Update() {
+            // if the game manager is not paused
             if(!GameManager.Instance.paused) {
                 Move();
             }
@@ -38,16 +43,14 @@ namespace FallinDots {
         }
 
 		private void Move() {
-            if(!GameManager.Instance.paused) {
-                float moveDistance = speed * Time.deltaTime;
-                Vector3 currentPosition = transform.position;
-                Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
+            float moveDistance = speed * Time.deltaTime;
+            Vector3 currentPosition = transform.position;
+            Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
 
-                if(nextPosition.y < CamUtils().bounds.minY) {
-                    Destroy(gameObject);
-                } else {
-                    transform.Translate(Vector3.down * moveDistance);
-                }
+            if(nextPosition.y < CamUtils().bounds.minY) {
+                Destroy(gameObject);
+            } else {
+                transform.Translate(Vector3.down * moveDistance);
             }
 		}
 
