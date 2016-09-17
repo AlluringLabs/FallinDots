@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using FallinDots.Generic;
+using FallinDots.Dots;
 
 namespace FallinDots {
 	

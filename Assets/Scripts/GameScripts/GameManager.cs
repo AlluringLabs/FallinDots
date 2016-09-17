@@ -34,25 +34,53 @@ namespace FallinDots {
         }
 
 		void Update() {
-			// Kind of shit for now, but eventually we'll need something like this for mobile
-			// pause menu of sorts.
-			if (Input.GetKeyDown(KeyCode.Escape)) {
-				TogglePause();
-			}
+            
+            // For testing on Desktop and desktop controls
+            if(Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor) {
 
-            // Fun idea
-            if(Input.GetKeyDown(KeyCode.A)) {
-                Time.timeScale = Time.timeScale + 1;
+                // Shit for now
+                if (Input.GetKeyDown(KeyCode.Escape)) {
+                    TogglePause();
+                }
+
+                // Fun idea
+                if(Input.GetKeyDown(KeyCode.A)) {
+                    Time.timeScale = Time.timeScale + 1;
+                }
+            }
+
+            // Just some basic Input code for Dots...
+            // TODO: move this to somewhere else...
+            if(Input.GetMouseButtonDown(0)) {
+                Debug.Log(Input.mousePosition);
+                Debug.Log(Vector2.zero);
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                if(hit.collider != null) {
+                    if(hit.collider.gameObject.tag == "Dot") {
+                        Destroy(hit.collider.gameObject);
+                    }
+                }
+            }
+
+            if(Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android) {
+                // Implement
+//                for (int i = 0; i < Input.touchCount; i++) {
+//                    if(Input.GetTouch(i).phase == TouchPhase.Began) {
+//                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position, Vector2.zero));
+//                        if(hit.collider != null && hit.transform.gameObject.tag == "dot") {
+//                            Destroy(hit.transform.gameObject);
+//                        }
+//                    }
+//                }
             }
         }
 
 		// Just toggles the pause state of the game. This should probably include something like
 		// fading a menu in/out as well.
 		private void TogglePause() {
-            // NOTE: Probably not the best way to handle pausing. Should have own "Time" class
-            // that might handle this on it's own.
-
-            // TODO: Make the Pause menu show up or something and do something "cool"
             if(paused) {
                 paused = false;
                 Time.timeScale = 1;

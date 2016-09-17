@@ -2,9 +2,9 @@
 using System.Collections;
 using FallinDots.Generic;
 
-namespace FallinDots {
+namespace FallinDots.Dots {
 
-	public class DotSpawner : BaseBehaviour {
+	public class Spawner : BaseBehaviour {
 
 		public float timeBetweenSpawn = 1f;
 		public bool disabled = false;
@@ -50,12 +50,13 @@ namespace FallinDots {
             count = count + 1;
             Dot newDot = ThemeManager.Instance.GetRandom();
 
-            Vector3 newPosition = RandomizePosition(newDot.width);
-            Vector3 randomScale = RandomizeScale(newDot.width, newDot.width * 2);
+            Vector3 newPosition = RandomizePosition(1.5f);
+            Vector3 randomScale = RandomizeScale(1.5f, 1.5f * 2);
 
             Dot spawnedDot = (Dot) Instantiate(newDot, newPosition, Quaternion.identity);
             spawnedDot.transform.localScale = randomScale;
             spawnedDot.transform.parent = GameObject.Find("DynamicObjects").transform;
+            spawnedDot.transform.tag = "Dot";
             spawnedDot.name = "DOT_" + count;
 
             yield return null;

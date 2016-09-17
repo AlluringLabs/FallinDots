@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections;
-using TouchScript.Gestures;
 using FallinDots.Generic;
 
-namespace FallinDots {
+namespace FallinDots.Dots {
 	
     public class Dot : BaseBehaviour {
 
@@ -16,31 +15,12 @@ namespace FallinDots {
 		// How big the dot is
 		public float width = 1.5f;
 
-//        public Dot() {
-//            
-//        }
-
-        private void Start() {
-            GetComponent<TapGesture>().Tapped += tappedHandler;
-        }
-
-        private void OnDestroy() {
-            GetComponent<TapGesture>().Tapped -= tappedHandler;
-        }
-
 		void Update() {
             // if the game manager is not paused
             if(!GameManager.Instance.paused) {
                 Move();
             }
 		}
-
-        private void tappedHandler(object sender, EventArgs e) {
-            Debug.Log("YEP");
-            Debug.Log(sender.GetType().Name.ToString());
-            Debug.Log(e.ToString());
-            Destroy(gameObject);
-        }
 
 		private void Move() {
             float moveDistance = speed * Time.deltaTime;
