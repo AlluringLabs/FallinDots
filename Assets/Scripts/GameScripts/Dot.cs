@@ -38,14 +38,16 @@ namespace FallinDots {
         }
 
 		private void Move() {
-            float moveDistance = speed * Time.deltaTime;
-            Vector3 currentPosition = transform.position;
-            Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
+            if(!GameManager.Instance.paused) {
+                float moveDistance = speed * Time.deltaTime;
+                Vector3 currentPosition = transform.position;
+                Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
 
-            if(nextPosition.y < CamUtils().bounds.minY) {
-                Destroy(gameObject);
-            } else {
-                transform.Translate(Vector3.down * moveDistance);
+                if(nextPosition.y < CamUtils().bounds.minY) {
+                    Destroy(gameObject);
+                } else {
+                    transform.Translate(Vector3.down * moveDistance);
+                }
             }
 		}
 

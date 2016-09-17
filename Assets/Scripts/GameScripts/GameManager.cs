@@ -21,6 +21,7 @@ namespace FallinDots {
 
 		void Start() {
 			started = true;
+            paused = false;
 		}
 
         void Awake() {
@@ -35,10 +36,14 @@ namespace FallinDots {
 		void Update() {
 			// Kind of shit for now, but eventually we'll need something like this for mobile
 			// pause menu of sorts.
-			if (Input.GetKeyDown(KeyCode.Escape))
-			{
+			if (Input.GetKeyDown(KeyCode.Escape)) {
 				TogglePause();
 			}
+
+            // Fun idea
+            if(Input.GetKeyDown(KeyCode.A)) {
+                Time.timeScale = Time.timeScale + 1;
+            }
         }
 
 		// Just toggles the pause state of the game. This should probably include something like
