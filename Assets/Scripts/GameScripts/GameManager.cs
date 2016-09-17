@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
-using TouchScript.Gestures;
 using FallinDots.Generic;
 
 namespace FallinDots {
