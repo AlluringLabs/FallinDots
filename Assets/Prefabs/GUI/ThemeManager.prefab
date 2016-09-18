@@ -48,14 +48,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010924026744}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a6ccb9b33ad84347a12900a5ac9b978, type: 3}
+  m_Script: {fileID: 11500000, guid: 31bf5a08748ca294496fea8fd168b5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   themes:
-  - themeName: Only Theme
+  - themeName: Default
     themeStyles:
-    - {fileID: 114000010135497952, guid: af4739eea7cc343f394aa178681da781, type: 2}
-    - {fileID: 114000011472283150, guid: 664790bb21b3745feb7392767b716322, type: 2}
-    - {fileID: 114000011887108708, guid: b0473ca63b2104950bad0b6727f7591c, type: 2}
-    - {fileID: 114000013875761318, guid: 4397610c6d29f4173a95db58a9049b6f, type: 2}
-    - {fileID: 114000013663099966, guid: a1ae2f18d8df342efbef2bc4ac4e3136, type: 2}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}

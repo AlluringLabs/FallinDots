@@ -22,7 +22,6 @@ GameObject:
   - 212: {fileID: 212000011780911006}
   - 58: {fileID: 58000014033001990}
   - 114: {fileID: 114000013663099966}
-  - 114: {fileID: 114000011928528006}
   m_Layer: 0
   m_Name: red-face-blank
   m_TagString: Untagged
@@ -57,46 +56,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &114000011928528006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000010968692880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cachedTransform: {fileID: 0}
-  advancedProps: 0
-  minTouches: 0
-  maxTouches: 0
-  combineTouches: 0
-  combineTouchesInterval: 0.3
-  useSendMessage: 0
-  sendStateChangeMessages: 0
-  sendMessageTarget: {fileID: 0}
-  requireGestureToFail: {fileID: 0}
-  friendlyGestures: []
-  numTouches: 0
-  layer: {fileID: 0}
-  gestureManagerInstance: {fileID: 0}
-  delayedStateChange: 0
-  requiredGestureFailed: 0
-  state: 0
-  cachedScreenPosition: {x: 0, y: 0}
-  cachedPreviousScreenPosition: {x: 0, y: 0}
-  <PreviousState>k__BackingField: 0
-  <touchesNumState>k__BackingField: 0
-  numberOfTapsRequired: 1
-  timeLimit: Infinity
-  distanceLimit: Infinity
-  distanceLimitInPixelsSquared: 0
-  isActive: 0
-  tapsDone: 0
-  startPosition: {x: 0, y: 0}
-  totalMovement: {x: 0, y: 0}
 --- !u!114 &114000013663099966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -105,11 +64,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000010968692880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 315efe13cb6084daf92214ce8fb88cc8, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ecb67bdf06e86c43a8eeaa0517df04b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
-  width: 2.5
+  width: 1.5
 --- !u!212 &212000011780911006
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -139,7 +98,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8890810b855ed499db3b070a7f94df64, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57686803014025e48a6cc737abac0576, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
