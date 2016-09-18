@@ -7,8 +7,8 @@ namespace FallinDots.Dots {
 	
     public class Dot : BaseBehaviour {
 
-        public delegate void DotDestroyed();
-        public event DotDestroyed dotDestroyed;
+        //public delegate void DotDestroyed();
+        //public event DotDestroyed dotDestroyed;
 //        public event Action DotDestroyed(bool byUser);
 
 		// TODO: Add modifiers for dots like powerups, movement variations, etc...

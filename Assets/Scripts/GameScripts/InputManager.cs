@@ -7,8 +7,8 @@ namespace FallinDots {
 
     public class InputManager : BaseBehaviour {
 
-        public delegate void DotTapped(GameObject target);
-        public event DotTapped dotTapped;
+        //public delegate void DotTapped(GameObject target);
+        //public event DotTapped dotTapped;
 
         public delegate void PauseToggle();
         public event PauseToggle pauseToggleEvent;
