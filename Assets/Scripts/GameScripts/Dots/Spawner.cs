@@ -24,15 +24,18 @@ namespace FallinDots.Dots {
             }
 		}
 
-        Vector3 RandomizePosition(float width) {
+        Vector3 RandomizePosition(Vector3 scale) {
             Vector3 randomPosition = CamUtils().GetScreenPosition(Random.value);
-            float halfWidth = width / 2;
+            float halfWidth = scale.y / 2;
 
             if(randomPosition.x < CamUtils().bounds.minX + halfWidth) {
                 randomPosition += (Vector3.right * halfWidth);
             } else if(randomPosition.x > CamUtils().bounds.maxX - halfWidth) {
                 randomPosition -= (Vector3.right * halfWidth);
             }
+            
+            // Make sure the dot ALWAYS spawns above the screen
+            randomPosition += (Vector3.up * halfWidth);
 
             return randomPosition;
         }
@@ -49,9 +52,10 @@ namespace FallinDots.Dots {
         IEnumerator SpawnDot() {
             count = count + 1;
             Dot newDot = ThemeManager.Instance.GetRandom();
+            newDot.width = 0.5f;
 
-            Vector3 newPosition = RandomizePosition(1.5f);
-            Vector3 randomScale = RandomizeScale(1.5f, 1.5f * 2);
+            Vector3 randomScale = RandomizeScale(newDot.width, 3.0f);
+            Vector3 newPosition = RandomizePosition(randomScale);
 
             Dot spawnedDot = (Dot) Instantiate(newDot, newPosition, Quaternion.identity);
             spawnedDot.transform.localScale = randomScale;

@@ -21,14 +21,33 @@ namespace FallinDots {
         // Handles the input of mobile devices based on RuntimePlatform
         private void handleMobileInput() {
             if(Application.isMobilePlatform) {
-//                for (int i = 0; i < Input.touchCount; i++) {
-//                    if(Input.GetTouch(i).phase == TouchPhase.Began) {
-//                        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position, Vector2.zero));
-//                        if(hit.collider != null && hit.transform.gameObject.tag == "dot") {
-//                            Destroy(hit.transform.gameObject);
-//                        }
-//                    }
-//                }
+                for (int i = 0; i < Input.touchCount; i++) {
+                    if(Input.GetTouch(i).phase == TouchPhase.Began)
+                    {
+                        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                        handleRaycastHit(hit);
+                    }
+                }
+            }
+        }
+
+        private void handleRaycastHit(RaycastHit2D hit) {
+            // WE did hit something, now figure out what it was
+            if (hit.collider != null)
+            {
+
+                // First, check if the object is a Dot
+                if (hit.collider.gameObject.tag == "Dot")
+                {
+                    if (!GameManager.Instance.paused)
+                    {
+                        Dots.Dot hitDot = hit.collider.gameObject.GetComponent<Dots.Dot>();
+                        hitDot.destroy();
+                    }
+                }
+
             }
         }
 
@@ -56,19 +75,7 @@ namespace FallinDots {
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                     RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
-                    // WE did hit something, now figure out what it was
-                    if(hit.collider != null) {
-
-                        // First, check if the object is a Dot
-                        if(hit.collider.gameObject.tag == "Dot") {
-                            if(!GameManager.Instance.paused) {
-                                Dots.Dot hitDot = hit.collider.gameObject.GetComponent<Dots.Dot>();
-                                hitDot.destroy();
-                            }
-                        }
-
-                    }
-
+                    handleRaycastHit(hit);
                 }
             }
         }
