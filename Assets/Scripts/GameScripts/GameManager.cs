@@ -21,6 +21,7 @@ namespace FallinDots {
 
         public Canvas pauseMenu;
         public Canvas overlayCanvas;
+        public Canvas scoreOverlay;
 
         public Text score;
 
@@ -28,6 +29,8 @@ namespace FallinDots {
 			started = true;
             paused = false;
 
+            pauseMenu.gameObject.SetActive(false);
+            scoreOverlay.gameObject.SetActive(true);
             FindObjectOfType<InputManager>().pauseToggleEvent += TogglePause;
 		}
 

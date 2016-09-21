@@ -6,23 +6,36 @@ namespace FallinDots.Dots {
 
 	public class Spawner : BaseBehaviour {
 
+        public float minTimeBetweenSpawn = 0.0f;
+        public float maxTimeBetweenSpawn = 5f;
+
 		public float timeBetweenSpawn = 1f;
 		public bool disabled = false;
         public int count = 0;
 
 		float nextSpawnTime;
+        float lastSpawnTimeUpdate;
 		
 		// Update is called once per frame
 		void Update () {
-            
+
             // Has the game started? Is the game paused? Is this spawn point disabled?
             if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled) {
-                if(Time.time > nextSpawnTime) {
+                if (Time.time > nextSpawnTime) {
                     nextSpawnTime = Time.time + timeBetweenSpawn;
                     StartCoroutine(SpawnDot());
                 }
             }
 		}
+
+        void FixedUpdate()
+        {
+            if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled)
+            {
+                // This doesn't work, but there needs to be a way to "gradually" increase the speed.
+                // timeBetweenSpawn = Mathf.Lerp(minTimeBetweenSpawn, maxTimeBetweenSpawn, Time.fixedDeltaTime * 2);
+            }
+        }
 
         Vector3 RandomizePosition(Vector3 scale) {
             Vector3 randomPosition = CamUtils().GetScreenPosition(Random.value);
@@ -52,6 +65,7 @@ namespace FallinDots.Dots {
         IEnumerator SpawnDot() {
             count = count + 1;
             Dot newDot = ThemeManager.Instance.GetRandom();
+
             newDot.width = 0.5f;
 
             Vector3 randomScale = RandomizeScale(newDot.width, 3.0f);
