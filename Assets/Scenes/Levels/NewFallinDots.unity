@@ -114,7 +114,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2022004}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5778db1a315adc54493620a0ae62e813, type: 3}
+  m_Script: {fileID: 11500000, guid: 32b560034809a1d469125541615839e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   paused: 0
@@ -123,10 +123,10 @@ MonoBehaviour:
   currentLevel: 0
   playerScore: 0
   playerLose: 0
-  pauseMenu: {fileID: 1162291472}
-  overlayCanvas: {fileID: 2072862684}
-  scoreOverlay: {fileID: 1507682590}
-  score: {fileID: 903709906}
+  pauseMenu: {fileID: 0}
+  overlayCanvas: {fileID: 0}
+  scoreOverlay: {fileID: 0}
+  score: {fileID: 0}
 --- !u!4 &2022006
 Transform:
   m_ObjectHideFlags: 0
@@ -257,17 +257,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 410841899}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31bf5a08748ca294496fea8fd168b5f2, type: 3}
+  m_Script: {fileID: 11500000, guid: 04574fafe6efdc44389a9ca48ceaef87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  themes:
-  - themeName: Default
-    themeStyles:
-    - {fileID: 114000010135497952, guid: 109b38dd48f019d40ba1bef3f61f6490, type: 2}
-    - {fileID: 114000011472283150, guid: dc3e010a58fc17a49b39b141329c5485, type: 2}
-    - {fileID: 114000011887108708, guid: b7a29dd9a6473774d9a89d77c3b842b1, type: 2}
-    - {fileID: 114000013875761318, guid: 9a2a72bb1244873489eeff5c61c47be6, type: 2}
-    - {fileID: 114000013663099966, guid: 6a9206274002d234db29c6130882d27e, type: 2}
+  themes: []
 --- !u!4 &410841901
 Transform:
   m_ObjectHideFlags: 0
@@ -1160,11 +1153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fc90a1236378404897ddf147e742c07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minTimeBetweenSpawn: 0
-  maxTimeBetweenSpawn: 5
-  timeBetweenSpawn: 1
-  disabled: 0
-  count: 0
 --- !u!4 &1050730830
 Transform:
   m_ObjectHideFlags: 0
@@ -1859,9 +1847,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b32bb120cc012214a9be8d32fb8abc2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScoreText: {fileID: 0}
-  amountLostText: {fileID: 0}
-  currentLevelText: {fileID: 0}
 --- !u!114 &2072862682
 MonoBehaviour:
   m_ObjectHideFlags: 0
