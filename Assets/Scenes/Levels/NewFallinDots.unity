@@ -149,7 +149,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 340102564}
   m_Layer: 0
-  m_Name: UI
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
