@@ -25,6 +25,7 @@ namespace FallinDots {
                     if(Input.GetTouch(i).phase == TouchPhase.Began)
                     {
                         Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                        Debug.DrawRay(ray.origin, ray.direction, Color.red);
                         RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
 
                         handleRaycastHit(hit);

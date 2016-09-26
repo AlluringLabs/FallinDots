@@ -41,7 +41,7 @@ namespace FallinDots.Dots {
             Vector3 currentPosition = transform.position;
             Vector3 nextPosition = currentPosition + (Vector3.down * moveDistance);
 
-            if(nextPosition.y < CamUtils().bounds.minY - width * 2) {
+            if(nextPosition.y < CamUtils().bounds.minY - this.gameObject.transform.localScale.x) {
                 Destroy(gameObject);
             } else {
                 transform.Translate(Vector3.down * moveDistance);
