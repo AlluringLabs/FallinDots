@@ -64,22 +64,28 @@ namespace FallinDots.Dots {
 
         IEnumerator SpawnDot() {
             count = count + 1;
-            Dot newDot = ThemeManager.Instance.GetRandom();
 
-            newDot.width = 0.5f;
-
-            Vector3 randomScale = RandomizeScale(newDot.width, 3.0f);
+            Sprite sprite = ThemeManager.Instance.GetRandomSprite();
+            Vector3 randomScale = RandomizeScale(1.0f, 3.0f);
             Vector3 newPosition = RandomizePosition(randomScale);
+            GameObject obj = new GameObject();
+            obj.transform.parent = GameObject.Find("DynamicObjects").transform;
 
-            Dot spawnedDot = (Dot) Instantiate(newDot, newPosition, Quaternion.identity);
-            spawnedDot.transform.localScale = randomScale;
-            spawnedDot.transform.parent = GameObject.Find("DynamicObjects").transform;
-            spawnedDot.transform.tag = "Dot";
-            spawnedDot.name = "DOT_" + count;
+            GameObject dot = (GameObject)Instantiate(obj, newPosition, Quaternion.identity);
 
-            yield return null;
-        }
+            // Add components to the dot
+            dot.gameObject.AddComponent<SpriteRenderer>().sprite = sprite;
+            dot.gameObject.AddComponent<CircleCollider2D>();
+            dot.gameObject.AddComponent<Dot>().width = 0.5f;
             
+            // Set scale and parent/tags
+            dot.transform.localScale = randomScale;
+            dot.transform.parent = GameObject.Find("DynamicObjects").transform;
+            dot.transform.tag = "Dot";
+
+            yield return new WaitForEndOfFrame();
+        }
+
 	}
 
 }
