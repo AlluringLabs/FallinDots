@@ -4,49 +4,66 @@ using FallinDots.Generic;
 
 namespace FallinDots.Dots {
 
-	public class Spawner : BaseBehaviour {
+    public class Spawner : BaseBehaviour {
 
-        public float minTimeBetweenSpawn = 0.0f;
+        public float minTimeBetweenSpawn = 0.07f;
         public float maxTimeBetweenSpawn = 5f;
 
-		public float timeBetweenSpawn = 1f;
-		public bool disabled = false;
+        public float timeBetweenSpawn = 1f;
+        public bool disabled = false;
         public int count = 0;
 
-		float nextSpawnTime;
+        float nextSpawnTime;
         float lastSpawnTimeUpdate;
-		
-		// Update is called once per frame
-		void Update () {
 
-            // Has the game started? Is the game paused? Is this spawn point disabled?
-            if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled) {
-                if (Time.time > nextSpawnTime) {
-                    nextSpawnTime = Time.time + timeBetweenSpawn;
-                    StartCoroutine(SpawnDot());
+        GameManager gameManager;
+
+        void Start() {
+            gameManager = GameManager.Instance;
+            lastSpawnTimeUpdate = Time.time;
+        }
+
+        // Update is called once per frame
+        void Update () {
+            bool isTimeToSpawnDot = Time.time > nextSpawnTime;
+
+            if (gameManager.isGameRunning() && isTimeToSpawnDot && !disabled) {
+                nextSpawnTime = Time.time + timeBetweenSpawn;
+                StartCoroutine(SpawnDot());
+            }
+        }
+
+        void FixedUpdate() {
+            if (gameManager.isGameRunning() && !disabled && isTimeToUpdateSpawnRate()) {
+                // Raw, random values that will help us calculate the new timeChange.
+                float timeChange = 5f / Random.Range(70, 100);
+                float newTime = timeBetweenSpawn - timeChange;
+
+                if (newTime > minTimeBetweenSpawn) {
+                    timeBetweenSpawn = timeBetweenSpawn - timeChange;
                 }
-            }
-		}
+                else {
+                    timeBetweenSpawn = minTimeBetweenSpawn;
+                }
 
-        void FixedUpdate()
-        {
-            if(GameManager.Instance.started && !GameManager.Instance.paused && !disabled)
-            {
-                // This doesn't work, but there needs to be a way to "gradually" increase the speed.
-                // timeBetweenSpawn = Mathf.Lerp(minTimeBetweenSpawn, maxTimeBetweenSpawn, Time.fixedDeltaTime * 2);
+                lastSpawnTimeUpdate = Time.time;
             }
+        }
+
+        bool isTimeToUpdateSpawnRate() {
+            return (Time.time - lastSpawnTimeUpdate) >= 10;
         }
 
         Vector3 RandomizePosition(Vector3 scale) {
             Vector3 randomPosition = CamUtils().GetScreenPosition(Random.value);
             float halfWidth = scale.y / 2;
 
-            if(randomPosition.x < CamUtils().bounds.minX + halfWidth) {
+            if (randomPosition.x < CamUtils().bounds.minX + halfWidth) {
                 randomPosition += (Vector3.right * halfWidth);
-            } else if(randomPosition.x > CamUtils().bounds.maxX - halfWidth) {
+            } else if (randomPosition.x > CamUtils().bounds.maxX - halfWidth) {
                 randomPosition -= (Vector3.right * halfWidth);
             }
-            
+
             // Make sure the dot ALWAYS spawns above the screen
             randomPosition += (Vector3.up * halfWidth);
 
@@ -79,7 +96,7 @@ namespace FallinDots.Dots {
 
             yield return null;
         }
-            
-	}
+
+    }
 
 }

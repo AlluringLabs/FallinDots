@@ -5,8 +5,8 @@ using FallinDots.Generic;
 
 namespace FallinDots {
 
-	public class GameManager : BaseBehaviour
-	{
+    public class GameManager : BaseBehaviour
+    {
 
         public static GameManager Instance;
 
@@ -25,14 +25,14 @@ namespace FallinDots {
 
         public Text score;
 
-		void Start() {
-			started = true;
+        void Start() {
+            started = true;
             paused = false;
 
             pauseMenu.gameObject.SetActive(false);
             scoreOverlay.gameObject.SetActive(true);
             FindObjectOfType<InputManager>().pauseToggleEvent += TogglePause;
-		}
+        }
 
         void Awake() {
             if(!Instance) {
@@ -43,8 +43,8 @@ namespace FallinDots {
             }
         }
 
-		void Update() {
-            
+        void Update() {
+
         }
 
         public void updateScore() {
@@ -52,15 +52,19 @@ namespace FallinDots {
             score.text = playerScore.ToString();
         }
 
+        public bool isGameRunning() {
+            return started && !paused;
+        }
+
         private void OnDotDestroyed() {
             playerScore++;
             score.text = playerScore.ToString();
         }
 
-		// Just toggles the pause state of the game. This should probably include something like
-		// fading a menu in/out as well.
-		private void TogglePause() {
-            if(paused) {
+        // Just toggles the pause state of the game. This should probably include something like
+        // fading a menu in/out as well.
+        private void TogglePause() {
+            if (paused) {
                 paused = false;
                 pauseMenu.gameObject.SetActive(false);
                 Time.timeScale = 1;
@@ -69,8 +73,8 @@ namespace FallinDots {
                 pauseMenu.gameObject.SetActive(true);
                 Time.timeScale = 0;
             }
-		}
+        }
 
-	}
+    }
 
 }
