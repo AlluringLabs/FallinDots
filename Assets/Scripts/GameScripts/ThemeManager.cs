@@ -29,14 +29,18 @@ namespace FallinDots {
         [System.Serializable]
         public class Theme {
             public string themeName;
-            public Dot[] themeStyles;
+            public Sprite[] themeStyles;
+        }
+
+        public Sprite GetRandomSprite() {
+            int maxRange = themes[current].themeStyles.Length;
+            int random = Random.Range(0, maxRange);
+            Sprite randomStyle = themes[current].themeStyles[random];
+            return randomStyle;
         }
 
         public Dot GetRandom() {
-            int maxRange = themes[current].themeStyles.Length;
-            int random = Random.Range(0, maxRange);
-            Dot randomStyle = themes[current].themeStyles[random];
-            return randomStyle;
+            return new Dots.Dot();
         }
 
     }

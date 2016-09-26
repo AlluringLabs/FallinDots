@@ -123,12 +123,12 @@ MonoBehaviour:
   currentLevel: 0
   playerScore: 0
   playerLose: 0
-  pauseMenu: {fileID: 223000011978035766, guid: a10268d891eb107448b09c20ef449bfc,
+  pauseMenu: {fileID: 1000010678390524, guid: a10268d891eb107448b09c20ef449bfc, type: 2}
+  overlayCanvas: {fileID: 1000011840188020, guid: 0c84a4cad10f6044e8a3a67f74ac94b6,
     type: 2}
-  overlayCanvas: {fileID: 223000012244419632, guid: 0c84a4cad10f6044e8a3a67f74ac94b6,
+  scoreOverlay: {fileID: 1000010182652434, guid: 7b1387301c8ed6e459100a57a6a5315e,
     type: 2}
-  scoreOverlay: {fileID: 223000010075930998, guid: 7b1387301c8ed6e459100a57a6a5315e,
-    type: 2}
+  input: {fileID: 0}
   score: {fileID: 114000013176563426, guid: b6b21f9ac4f1c074dbb9b7890e9dd37c, type: 2}
 --- !u!4 &2022006
 Transform:
@@ -266,10 +266,11 @@ MonoBehaviour:
   themes:
   - themeName: Default
     themeStyles:
-    - {fileID: 114000010135497952, guid: 109b38dd48f019d40ba1bef3f61f6490, type: 2}
-    - {fileID: 114000011472283150, guid: dc3e010a58fc17a49b39b141329c5485, type: 2}
-    - {fileID: 114000011887108708, guid: b7a29dd9a6473774d9a89d77c3b842b1, type: 2}
-    - {fileID: 114000013875761318, guid: 9a2a72bb1244873489eeff5c61c47be6, type: 2}
+    - {fileID: 21300000, guid: 57686803014025e48a6cc737abac0576, type: 3}
+    - {fileID: 21300000, guid: dcd1d40efeeb73a428a440e76423a790, type: 3}
+    - {fileID: 21300000, guid: df2a6cdd463dbb14fa0a729242318219, type: 3}
+    - {fileID: 21300000, guid: 9fdeb694abe81044eb42562375a0b5ec, type: 3}
+    - {fileID: 21300000, guid: 9e76863638f5475438039520308a2a8a, type: 3}
 --- !u!4 &410841901
 Transform:
   m_ObjectHideFlags: 0

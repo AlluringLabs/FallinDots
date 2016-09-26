@@ -7,9 +7,9 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 0
     path: Assets/Scenes/WELCOME.unity
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/_GAME_.unity
   - enabled: 0
     path: Assets/Scenes/Levels/FallinDots.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Levels/NewFallinDots.unity

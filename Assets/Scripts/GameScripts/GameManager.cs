@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using FallinDots.Generic;
@@ -19,28 +20,31 @@ namespace FallinDots {
         public int playerScore = 0;
         public int playerLose = 0;
 
-        public Canvas pauseMenu;
-        public Canvas overlayCanvas;
-        public Canvas scoreOverlay;
+        public GameObject pauseMenu;
+        public GameObject overlayCanvas;
+        public GameObject scoreOverlay;
+
+        public InputManager input;
 
         public Text score;
 
-        void Start() {
+        void Awake() {
+            if (!Instance) {
+                Instance = this;
+            } else {
+                Destroy(gameObject);
+            }
+
+            DontDestroyOnLoad(gameObject);
+
+            this.gameObject.AddComponent<InputManager>();
+
             started = true;
             paused = false;
 
             pauseMenu.gameObject.SetActive(false);
-            scoreOverlay.gameObject.SetActive(true);
-            FindObjectOfType<InputManager>().pauseToggleEvent += TogglePause;
-        }
-
-        void Awake() {
-            if(!Instance) {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            } else {
-                Destroy(gameObject);
-            }
+            //pauseMenu.GetComponent<CanvasGroup>().alpha = 0;
+            GetComponent<InputManager>().pauseToggleEvent += TogglePause;
         }
 
         void Update() {
@@ -49,7 +53,7 @@ namespace FallinDots {
 
         public void updateScore() {
             playerScore = playerScore + 1;
-            score.text = playerScore.ToString();
+            //score.text = playerScore.ToString();
         }
 
         public bool isGameRunning() {
@@ -58,21 +62,52 @@ namespace FallinDots {
 
         private void OnDotDestroyed() {
             playerScore++;
-            score.text = playerScore.ToString();
+            //score.text = playerScore.ToString();
         }
 
         // Just toggles the pause state of the game. This should probably include something like
         // fading a menu in/out as well.
-        private void TogglePause() {
+        public void TogglePause() {
+            paused = !paused;
+            StartCoroutine(TogglePauseMenu());
+        }
+
+        IEnumerator TogglePauseMenu() {
+            Debug.Log("toggle pause");
+            CanvasGroup image = pauseMenu.GetComponent<CanvasGroup>();
+
             if (paused) {
-                paused = false;
-                pauseMenu.gameObject.SetActive(false);
-                Time.timeScale = 1;
-            } else {
-                paused = true;
-                pauseMenu.gameObject.SetActive(true);
                 Time.timeScale = 0;
+                image.gameObject.SetActive(true);
+            } else {
+                Time.timeScale = 1;
+                image.gameObject.SetActive(false);
             }
+
+            yield return new WaitForEndOfFrame();
+
+            //while(image.alpha <= 1f) {
+            //    if (paused) {
+            //        image.alpha = image.alpha + (Time.deltaTime / 0.5f);
+            //    } else {
+            //        image.alpha = image.alpha - (Time.deltaTime / 0.5f);
+            //    }
+
+            //    yield return new WaitForEndOfFrame();
+            //}
+
+            ////if(paused) {
+            ////    image.gameObject.SetActive(true);
+            ////    image.CrossFadeAlpha(0, 0, true);
+            ////    image.CrossFadeAlpha(1, 0.4f, true);
+            ////    Debug.Log("Fade in");
+            ////} else {
+            ////    image.CrossFadeAlpha(0, 0.3f, true);
+            ////    Debug.Log("FAde out");
+            ////    yield return new WaitForSeconds(0.3f);
+            ////    Debug.Log("Deactivate");
+            ////    image.gameObject.SetActive(false);
+            ////}
         }
 
     }
