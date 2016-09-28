@@ -51,6 +51,10 @@ namespace FallinDots {
 
         }
 
+        public void Restart() {
+
+        }
+
         public void updateScore() {
             playerScore = playerScore + 1;
             //score.text = playerScore.ToString();

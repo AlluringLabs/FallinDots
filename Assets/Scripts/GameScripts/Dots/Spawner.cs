@@ -6,6 +6,8 @@ namespace FallinDots.Dots {
 
     public class Spawner : BaseBehaviour {
 
+        public GameObject basePrefab;
+
         public float minTimeBetweenSpawn = 0.1f;
         public float maxTimeBetweenSpawn = 5f;
 
@@ -51,7 +53,7 @@ namespace FallinDots.Dots {
         }
 
         bool isTimeToUpdateSpawnRate() {
-            return (Time.time - lastSpawnTimeUpdate) >= 10;
+            return (Time.time - lastSpawnTimeUpdate) >= 4;
         }
 
         Vector3 RandomizePosition(Vector3 scale) {
@@ -83,17 +85,14 @@ namespace FallinDots.Dots {
             count = count + 1;
 
             Sprite sprite = ThemeManager.Instance.GetRandomSprite();
-            Vector3 randomScale = RandomizeScale(1.0f, 3.0f);
+            Vector3 randomScale = RandomizeScale(1.0f, 1.5f);
             Vector3 newPosition = RandomizePosition(randomScale);
-            GameObject obj = new GameObject();
-            obj.transform.parent = GameObject.Find("DynamicObjects").transform;
 
-            GameObject dot = (GameObject)Instantiate(obj, newPosition, Quaternion.identity);
+            GameObject dot = (GameObject)Instantiate(basePrefab, newPosition, Quaternion.identity);
 
             // Add components to the dot
-            dot.gameObject.AddComponent<SpriteRenderer>().sprite = sprite;
-            dot.gameObject.AddComponent<CircleCollider2D>();
-            dot.gameObject.AddComponent<Dot>().width = 0.5f;
+            dot.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+            dot.gameObject.GetComponent<Dot>().width = 0.5f;
 
             // Set scale and parent/tags
             dot.transform.localScale = randomScale;

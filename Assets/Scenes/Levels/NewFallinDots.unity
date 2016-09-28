@@ -126,6 +126,7 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   overlayCanvas: {fileID: 0}
   scoreOverlay: {fileID: 0}
+  input: {fileID: 0}
   score: {fileID: 0}
 --- !u!4 &2022006
 Transform:
@@ -1080,6 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8df4c2c6d2a7c32458362e5e05ce7a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  basePrefab: {fileID: 1000010827195974, guid: 24e07fbc504407848a9ed08e668d770c, type: 2}
   minTimeBetweenSpawn: 0
   maxTimeBetweenSpawn: 5
   timeBetweenSpawn: 1

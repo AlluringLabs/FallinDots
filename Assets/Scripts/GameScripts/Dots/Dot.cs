@@ -26,6 +26,8 @@ namespace FallinDots.Dots {
             if(!GameManager.Instance.paused) {
                 Move();
             }
+
+            Debug.Log(Time.timeSinceLevelLoad);
 		}
 
         public void destroy() {
