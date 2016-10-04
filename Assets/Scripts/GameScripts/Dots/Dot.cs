@@ -23,7 +23,7 @@ namespace FallinDots.Dots {
                 Move();
             }
 
-            Debug.Log(Time.timeSinceLevelLoad);
+            //Debug.Log(Time.timeSinceLevelLoad);
         }
 
         public void destroy() {

@@ -29,7 +29,7 @@ namespace FallinDots.Generic {
 	    }
 
 	    public Vector3 GetScreenPosition(float x, float y) {
-            Vector3 viewport = new Vector3(x, y, cam.nearClipPlane);
+          Vector3 viewport = new Vector3(x, y, cam.nearClipPlane);
 	        return cam.ViewportToWorldPoint(viewport);
 	    }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using FallinDots.Generic;
+using FallinDots.Generic.Utils;
 using FallinDots.Dots.Modifiers;
 
 namespace FallinDots.Dots {
@@ -60,7 +61,8 @@ namespace FallinDots.Dots {
         }
 
         Vector3 RandomizePosition(Vector3 scale) {
-            Vector3 randomPosition = CamUtils().GetScreenPosition(Random.value);
+            float randomFloat = RandomUtils.RandomFloatRange(0f, 1f);
+            Vector3 randomPosition = CamUtils().GetScreenPosition(randomFloat);
             float halfWidth = scale.y / 2;
 
             if (randomPosition.x < CamUtils().bounds.minX + halfWidth) {
@@ -76,7 +78,7 @@ namespace FallinDots.Dots {
         }
 
         Vector3 RandomizeScale(float width, float maxWidth) {
-            float randomSize = Random.Range(width, maxWidth);
+            float randomSize = RandomUtils.RandomFloatRange(width, maxWidth);
             return new Vector3(randomSize, randomSize, 1);
         }
 
@@ -85,6 +87,8 @@ namespace FallinDots.Dots {
         }
 
         IEnumerator SpawnDot() {
+            RandomUtils.RandomIntRange(0, 150);
+
             for (int i=1; i<=dotsToSpawn; i++) {
                 count = count + 1;
 
@@ -105,9 +109,9 @@ namespace FallinDots.Dots {
                 dot.transform.localScale = randomScale;
                 dot.transform.parent = GameObject.Find("DynamicObjects").transform;
                 dot.transform.tag = "Dot";
-
-                yield return new WaitForEndOfFrame();
             }
+
+            yield return new WaitForEndOfFrame();
         }
 
     }

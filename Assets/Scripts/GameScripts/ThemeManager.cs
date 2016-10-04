@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-using FallinDots.Generic;
 using FallinDots.Dots;
+using FallinDots.Generic;
+using FallinDots.Generic.Utils;
 
 namespace FallinDots {
-	
-	public class ThemeManager : BaseBehaviour {
+
+    public class ThemeManager : BaseBehaviour {
 
         public static ThemeManager Instance;
 
@@ -34,7 +35,7 @@ namespace FallinDots {
 
         public Sprite GetRandomSprite() {
             int maxRange = themes[current].themeStyles.Length;
-            int random = Random.Range(0, maxRange);
+            int random = RandomUtils.RandomIntRange(0, maxRange);
             Sprite randomStyle = themes[current].themeStyles[random];
             return randomStyle;
         }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FallinDots.Dots.Modifiers;
+using FallinDots.Generic.Utils;
 
 namespace FallinDots.Dots {
 
@@ -41,7 +42,7 @@ namespace FallinDots.Dots {
         public void ApplyRandomModifier() {
             List<string> randomModifiers = Enumerable.ToList(modifiers.Keys);
 
-            int randomModifierInd = (int) Mathf.Floor(Random.Range(0, randomModifiers.Count));
+            int randomModifierInd = RandomUtils.RandomIntRange(0, randomModifiers.Count);
             string randomModifierName = randomModifiers[randomModifierInd];
 
             IModifierInterface modifier = modifiers[randomModifierName];
