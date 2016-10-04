@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using FallinDots.Generic;
+using FallinDots.Dots.Modifiers;
 
 namespace FallinDots.Dots {
 
@@ -14,19 +16,30 @@ namespace FallinDots.Dots {
         public float timeBetweenSpawn = 1f;
         public bool disabled = false;
         public int count = 0;
+        public int dotsToSpawn = 1;
+
+        // Dot Specific, Adjustable Params
+        public float dotSpeed = 3f;
 
         float nextSpawnTime;
         float lastSpawnTimeUpdate;
 
         GameManager gameManager;
+        DifficultyModifier difficultyModifier;
+        List<IModifierInterface> spawnerModifiers = new List<IModifierInterface> {
+            new SpeedModifier(),
+            new SpawnAmountModifier(),
+            new DotSpeedIncreaseModifier()
+        };
 
         void Start() {
             gameManager = GameManager.Instance;
             lastSpawnTimeUpdate = Time.time;
+
+            difficultyModifier = new DifficultyModifier(this, spawnerModifiers);
         }
 
-        // Update is called once per frame
-        void Update () {
+        void Update() {
             bool isTimeToSpawnDot = Time.time > nextSpawnTime;
 
             if (gameManager.isGameRunning() && isTimeToSpawnDot && !disabled) {
@@ -37,17 +50,7 @@ namespace FallinDots.Dots {
 
         void FixedUpdate() {
             if (gameManager.isGameRunning() && !disabled && isTimeToUpdateSpawnRate()) {
-                // Raw, random values that will help us calculate the new timeChange.
-                float timeChange = 5f / Random.Range(70, 100);
-                float newTime = timeBetweenSpawn - timeChange;
-
-                if (newTime > minTimeBetweenSpawn) {
-                    timeBetweenSpawn = timeBetweenSpawn - timeChange;
-                }
-                else {
-                    timeBetweenSpawn = minTimeBetweenSpawn;
-                }
-
+                difficultyModifier.ApplyRandomModifier();
                 lastSpawnTimeUpdate = Time.time;
             }
         }
@@ -82,24 +85,29 @@ namespace FallinDots.Dots {
         }
 
         IEnumerator SpawnDot() {
-            count = count + 1;
+            for (int i=1; i<=dotsToSpawn; i++) {
+                count = count + 1;
 
-            Sprite sprite = ThemeManager.Instance.GetRandomSprite();
-            Vector3 randomScale = RandomizeScale(1.0f, 1.5f);
-            Vector3 newPosition = RandomizePosition(randomScale);
+                Sprite sprite = ThemeManager.Instance.GetRandomSprite();
+                Vector3 randomScale = RandomizeScale(1.0f, 1.5f);
+                Vector3 newPosition = RandomizePosition(randomScale);
 
-            GameObject dot = (GameObject)Instantiate(basePrefab, newPosition, Quaternion.identity);
+                GameObject dot = (GameObject) Instantiate(basePrefab,
+                                                          newPosition,
+                                                          Quaternion.identity);
 
-            // Add components to the dot
-            dot.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-            dot.gameObject.GetComponent<Dot>().width = 0.5f;
+                // Add components to the dot
+                dot.gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
+                dot.gameObject.GetComponent<Dot>().width = 0.5f;
+                dot.gameObject.GetComponent<Dot>().speed = dotSpeed;
 
-            // Set scale and parent/tags
-            dot.transform.localScale = randomScale;
-            dot.transform.parent = GameObject.Find("DynamicObjects").transform;
-            dot.transform.tag = "Dot";
+                // Set scale and parent/tags
+                dot.transform.localScale = randomScale;
+                dot.transform.parent = GameObject.Find("DynamicObjects").transform;
+                dot.transform.tag = "Dot";
 
-            yield return new WaitForEndOfFrame();
+                yield return new WaitForEndOfFrame();
+            }
         }
 
     }
